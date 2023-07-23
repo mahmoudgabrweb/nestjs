@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as process from 'process';
-import { Country } from './countries/country.entity';
+import { CountryEntity } from './countries/country.entity';
 import { CountriesModule } from './countries/countries.module';
 
 @Module({
@@ -17,7 +17,7 @@ import { CountriesModule } from './countries/countries.module';
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [Country],
+      entities: [CountryEntity],
       synchronize: true,
     }),
     CountriesModule,

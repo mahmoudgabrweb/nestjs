@@ -1,7 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
-@Entity()
-export class Country {
+@Entity('countries')
+export class CountryEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -11,9 +17,9 @@ export class Country {
   @Column()
   logo: string;
 
-  @Column()
-  created_at: string;
+  @CreateDateColumn()
+  created_at: Date;
 
-  @Column()
-  updated_at: string;
+  @UpdateDateColumn()
+  updated_at: Date;
 }
