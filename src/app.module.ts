@@ -4,9 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as process from 'process';
-import { CountryEntity } from './countries/country.entity';
-import { CountryController } from './countries/country.controller';
-import { CountriesService } from './countries/countries.service';
+import { Country } from './countries/country.entity';
+import { CountriesModule } from './countries/countries.module';
 
 @Module({
   imports: [
@@ -18,11 +17,12 @@ import { CountriesService } from './countries/countries.service';
       username: process.env.USERNAME,
       password: process.env.PASSWORD,
       database: process.env.DATABASE,
-      entities: [CountryEntity],
+      entities: [Country],
       synchronize: true,
     }),
+    CountriesModule,
   ],
-  controllers: [AppController, CountryController],
-  providers: [AppService, CountriesService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
