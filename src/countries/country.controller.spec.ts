@@ -1,16 +1,16 @@
-import { CountryController } from './country.controller';
+import { CountriesController } from './countries.controller';
 import { Test, TestingModule } from '@nestjs/testing';
 import { CountriesService } from './countries.service';
 
 describe('CountryController', () => {
-  let countryController: CountryController;
+  let countryController: CountriesController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [CountryController],
+      controllers: [CountriesController],
       providers: [CountriesService],
     }).compile();
 
-    countryController = app.get<CountryController>(CountryController);
+    countryController = app.get<CountriesController>(CountriesController);
   });
 });

@@ -2,6 +2,6 @@ import { CountriesService } from './countries.service';
 import { Controller } from '@nestjs/common';
 
 @Controller()
-export class CountryController {
+export class CountriesController {
   constructor(private readonly countryService: CountriesService) {}
 }
