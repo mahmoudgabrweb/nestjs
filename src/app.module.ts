@@ -1,24 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as process from 'process';
+import { CountriesModule } from './countries/countries.module';
+import { dataSourceOptions } from '../data-source';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.HOST,
-      port: Number(process.env.PORT),
-      username: process.env.USERNAME,
-      password: process.env.PASSWORD,
-      database: process.env.DATABASE,
-      entities: [],
-      synchronize: true,
-    }),
-  ],
+  imports: [TypeOrmModule.forRoot(dataSourceOptions), CountriesModule],
   controllers: [AppController],
   providers: [AppService],
 })
