@@ -22,8 +22,8 @@ export class CountriesService {
     return country;
   }
 
-  create(country: CountryDto): Promise<CountryDto> {
-    return this.countryRepository.save(this.countryRepository.create(country));
+  async create(country: CountryDto): Promise<CountryDto> {
+    return await this.countryRepository.save(this.countryRepository.create(country));
   }
 
   async update(id: number, countryDto: CountryDto): Promise<CountryDto> {

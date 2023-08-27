@@ -46,14 +46,14 @@ export class CountriesController {
       );
       return country;
     } catch (error) {
-      throw new InternalServerErrorException('Error while saving country');
+      throw new InternalServerErrorException('Could not create country');
     }
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateCountryDto: UpdateCountryDto
+    @Body() updateCountryDto: UpdateCountryDto,
   ): Promise<CountryDto> {
     try {
       const country = await this.countryService.update(+id, updateCountryDto);
