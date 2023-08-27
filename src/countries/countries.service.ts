@@ -1,46 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Country } from './country.entity';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { CountryInterface } from './country.interface';
+import { Repository } from 'typeorm';
+import { CountryDto } from './dto/country.dto';
+import { CountryNotFoundError } from './errors/country-not-found.error';
 
 @Injectable()
 export class CountriesService {
   constructor(
     @InjectRepository(Country)
-    private countryRepository: Repository<CountryInterface>,
+    private countryRepository: Repository<Country>,
   ) {}
 
-  findAll(): Promise<CountryInterface[]> {
-    return this.countryRepository.find();
+  async findAll(): Promise<CountryDto[]> {
+    return await this.countryRepository.find();
   }
 
-  findOne(id: number): Promise<CountryInterface | null> {
-    return this.countryRepository.findOneById(id);
+  async findOne(id: number): Promise<CountryDto> {
+    const country = await this.countryRepository.findOneBy({ id });
+    if (!country) throw new CountryNotFoundError(id);
+    return country;
   }
 
-  create(country: CountryInterface): Promise<CountryInterface> {
+  create(country: CountryDto): Promise<CountryDto> {
     return this.countryRepository.save(this.countryRepository.create(country));
   }
 
-  update(id: number, country: CountryInterface): Promise<UpdateResult> {
-    return this.countryRepository
-      .createQueryBuilder()
-      .update()
-      .set({
-        name: country.name,
-        logo: country.logo,
-      })
-      .where('id = :id', { id })
-      .execute();
+  async update(id: number, countryDto: CountryDto): Promise<CountryDto> {
+    await this.countryRepository.update(id, countryDto);
+    return this.findOne(id);
   }
 
-  remove(id: number): Promise<DeleteResult> {
-    return this.countryRepository
-      .createQueryBuilder()
-      .delete()
-      .from(Country)
-      .where('id = :id', { id })
-      .execute();
+  async delete(id: number): Promise<void> {
+    await this.countryRepository.delete(id);
   }
 }
