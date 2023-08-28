@@ -8,15 +8,14 @@ import {
   NotFoundException,
   Param,
   Post,
-  Put,
+  Put
 } from '@nestjs/common';
 import { CountryDto, CreateCountryDto, UpdateCountryDto } from './dto';
 import { CountryNotFoundError } from './errors/country-not-found.error';
 
 @Controller('countries')
 export class CountriesController {
-  constructor(private readonly countryService: CountriesService) {
-  }
+  constructor(private readonly countryService: CountriesService) {}
 
   @Get()
   async findAll(): Promise<Array<CountryDto>> {
@@ -53,7 +52,7 @@ export class CountriesController {
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateCountryDto: UpdateCountryDto,
+    @Body() updateCountryDto: UpdateCountryDto
   ): Promise<CountryDto> {
     try {
       const country = await this.countryService.update(+id, updateCountryDto);
