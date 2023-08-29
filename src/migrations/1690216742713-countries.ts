@@ -11,29 +11,29 @@ export class Countries1690216742713 implements MigrationInterface {
             type: 'int',
             isPrimary: true,
             isGenerated: true,
-            generationStrategy: 'increment',
+            generationStrategy: 'increment'
           },
           {
             name: 'name',
-            type: 'varchar',
+            type: 'varchar'
           },
           {
             name: 'logo',
-            type: 'varchar',
+            type: 'varchar'
           },
           {
             name: 'created_at',
             type: 'timestamp',
-            default: 'now()',
+            default: 'now()'
           },
           {
             name: 'updated_at',
             type: 'timestamp',
-            default: 'now()',
-          },
-        ],
+            default: 'now()'
+          }
+        ]
       }),
-      true,
+      true
     );
   }
 

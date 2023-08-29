@@ -1,4 +1,4 @@
-export class UpdateCountryDto {
+export class CreateTeamDto {
   name: string;
   logo: string;
 }

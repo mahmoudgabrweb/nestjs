@@ -9,7 +9,7 @@ import { CountryNotFoundError } from './errors/country-not-found.error';
 export class CountriesService {
   constructor(
     @InjectRepository(Country)
-    private countryRepository: Repository<Country>,
+    private countryRepository: Repository<Country>
   ) {}
 
   async findAll(): Promise<CountryDto[]> {
@@ -23,7 +23,9 @@ export class CountriesService {
   }
 
   async create(country: CountryDto): Promise<CountryDto> {
-    return await this.countryRepository.save(this.countryRepository.create(country));
+    return await this.countryRepository.save(
+      this.countryRepository.create(country)
+    );
   }
 
   async update(id: number, countryDto: CountryDto): Promise<CountryDto> {
