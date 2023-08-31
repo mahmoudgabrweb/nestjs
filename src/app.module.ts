@@ -8,6 +8,6 @@ import { dataSourceOptions } from '../data-source';
 @Module({
   imports: [TypeOrmModule.forRoot(dataSourceOptions), CountriesModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService]
 })
 export class AppModule {}
