@@ -1,5 +1,6 @@
 import {
   Body,
+  Controller,
   Delete,
   Get,
   InternalServerErrorException,
@@ -11,10 +12,10 @@ import {
 import { CreateTeamDto, TeamDto, UpdateTeamDto } from './dto';
 import { TeamsService } from './teams.service';
 import { TeamNotFoundError } from './errors/team-not-found.error';
-import { CreateCountryDto } from 'src/countries/dto';
 import { TeamErrorCreate } from './errors/team-error-create.error';
 import { TeamErrorUpdate } from './errors/team-error-update.error';
 
+@Controller('teams')
 export class TeamsController {
   constructor(private readonly teamService: TeamsService) {}
 

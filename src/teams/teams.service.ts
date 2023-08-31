@@ -15,11 +15,16 @@ export class TeamsService {
   ) {}
 
   async findAll(): Promise<Array<TeamDto>> {
-    return await this.teamsRepository.find();
+    return await this.teamsRepository.find({
+      relations: ['country']
+    });
   }
 
   async findOne(id: number): Promise<TeamDto> {
-    const team = await this.teamsRepository.findOneBy({ id });
+    const team = await this.teamsRepository.findOne({
+      where: { id },
+      relations: ['country']
+    });
     if (!team) throw new TeamNotFoundError(id);
     return team;
   }
