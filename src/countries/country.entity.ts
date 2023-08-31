@@ -1,7 +1,10 @@
+import { Team } from 'src/teams/team.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
@@ -22,4 +25,8 @@ export class Country {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => Team, (team) => team.country)
+  @JoinColumn()
+  teams: Team;
 }

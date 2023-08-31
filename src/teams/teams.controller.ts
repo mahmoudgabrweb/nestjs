@@ -8,7 +8,7 @@ import {
   Post,
   Put
 } from '@nestjs/common';
-import { TeamDto, UpdateTeamDto } from './dto';
+import { CreateTeamDto, TeamDto, UpdateTeamDto } from './dto';
 import { TeamsService } from './teams.service';
 import { TeamNotFoundError } from './errors/team-not-found.error';
 import { CreateCountryDto } from 'src/countries/dto';
@@ -37,12 +37,12 @@ export class TeamsController {
   }
 
   @Post()
-  async create(@Body() createTeamDto: CreateCountryDto): Promise<TeamDto> {
+  async create(@Body() createTeamDto: CreateTeamDto): Promise<TeamDto> {
     try {
       return await this.teamService.create(createTeamDto);
     } catch (err) {
       if (err instanceof TeamErrorCreate) {
-        throw new NotFoundException(err.message);
+        throw new TeamErrorCreate();
       }
       throw new InternalServerErrorException();
     }
@@ -65,6 +65,6 @@ export class TeamsController {
 
   @Delete('id')
   async delete(@Param('id') id: string): Promise<void> {
-    this.teamService.delete(+id);
+    await this.teamService.delete(+id);
   }
 }
