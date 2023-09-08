@@ -1,16 +1,16 @@
-import { Team } from 'src/teams/team.entity';
+import { Country } from 'src/countries/country.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
 
-@Entity('countries')
-export class Country {
+@Entity('teams')
+export class Team {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,13 +20,16 @@ export class Country {
   @Column()
   logo: string;
 
+  @Column()
+  country_id: number;
+
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Team, (team) => team.country)
-  @JoinColumn()
-  teams: Team;
+  @ManyToOne(() => Country)
+  @JoinColumn({ name: 'country_id', referencedColumnName: 'id' })
+  country: Country;
 }
